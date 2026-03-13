@@ -34,7 +34,7 @@ class GrokImageAnalyzer:
                 "api_key": ("STRING", {
                     "multiline": False,
                     "default": "",
-                    "display": "password"
+                    "display": "XAI API Key"
                 }),
                 "model": (["grok-4-1-fast-non-reasoning"], {
                     "default": "grok-4-1-fast-non-reasoning"
@@ -52,13 +52,13 @@ class GrokImageAnalyzer:
             }
         }
 
-    RETURN_TYPES = ("STRING", "STRING")
-    RETURN_NAMES = ("prompt", "preview")
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("prompt",)
     FUNCTION = "analyze_image"
     CATEGORY = "image/analysis"
     OUTPUT_NODE = True
 
-    def analyze_image(self, image: torch.Tensor, api_key: str, model: str, system_prompt: str = "", user_prompt: str = "") -> Tuple[str, str]:
+    def analyze_image(self, image: torch.Tensor, api_key: str, model: str, system_prompt: str = "", user_prompt: str = "") -> Tuple[str]:
         """
         Analyze an image using Grok API and return a descriptive prompt
 
@@ -70,7 +70,7 @@ class GrokImageAnalyzer:
             user_prompt: Optional prompt for analysis
 
         Returns:
-            Tuple containing the generated prompt string and preview
+            Tuple containing the generated prompt string
         """
 
         # Validate API key
@@ -151,7 +151,7 @@ class GrokImageAnalyzer:
             
             logger.info(f"Generated prompt: {prompt}")
 
-            return (prompt, prompt)
+            return (prompt,)
 
         except requests.exceptions.RequestException as e:
             raise RuntimeError(f"Grok API request failed: {str(e)}")

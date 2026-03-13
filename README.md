@@ -33,6 +33,45 @@ cd /path/to/ComfyUI/custom_nodes
 git submodule add <this-repo-url> grok-analyzer
 ```
 
+### Option 3: RunPod (ComfyUI Pod)
+
+Use this when ComfyUI is running inside a RunPod template/container.
+
+1. Open your pod terminal (or SSH into the pod).
+2. Go to ComfyUI custom nodes directory (common path shown below):
+
+```bash
+cd /workspace/ComfyUI/custom_nodes
+```
+
+3. Clone this node:
+
+```bash
+git clone <this-repo-url> comfyui-image-to-prompt-node
+```
+
+4. Install dependencies in the pod environment:
+
+```bash
+pip install requests pillow
+```
+
+5. Set your API key in RunPod:
+- In the RunPod pod settings, add environment variable `XAI_API_KEY=your-api-key`.
+- Optional: add `XAI_BASE_URL` if using a custom endpoint.
+
+6. Restart ComfyUI (or restart the pod) so the new node and env vars are loaded.
+
+7. In ComfyUI, search for `Grok Image Analyzer` and use it in your workflow.
+
+RunPod notes:
+- Use a persistent volume for `/workspace` so `custom_nodes` changes survive restarts.
+- If your template uses a different ComfyUI path, find it first:
+
+```bash
+find / -maxdepth 4 -type d -name "custom_nodes" 2>/dev/null
+```
+
 ## Setup
 
 ### 1. Get Your API Key
