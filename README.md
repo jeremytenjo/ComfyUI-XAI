@@ -76,113 +76,11 @@ If using a custom API endpoint, set:
 export XAI_BASE_URL="https://custom-api.example.com/v1"
 ```
 
-## Node Inputs
+## Update Node
 
-| Input           | Type     | Description                  | Default                                     |
-| --------------- | -------- | ---------------------------- | ------------------------------------------- |
-| `image`         | IMAGE    | Input image to analyze       | Required                                    |
-| `api_key`       | STRING   | XAI API key (or use env var) | ""                                          |
-| `model`         | DROPDOWN | Model to use                 | `grok-4-1-fast-non-reasoning`               |
-| `user_prompt`   | STRING   | Analysis instructions        | "Describe this image in detail..."          |
-| `system_prompt` | STRING   | System context (optional)    | "You are an expert at creating detailed..." |
-
-## Node Outputs
-
-| Output   | Type   | Description                  |
-| -------- | ------ | ---------------------------- |
-| `prompt` | STRING | Generated descriptive prompt |
-
-## Usage Examples
-
-### Basic Image Captioning
-
-1. Load an image with your image loader node
-2. Add the **Grok Image Analyzer** node
-3. Connect the image to the node
-4. Add your API key
-5. Run the workflow
-6. Use the output prompt in your image generation node
-
-### Custom Analysis Prompts
-
-For specific use cases, customize the prompts:
-
-**For Product Photography:**
-
+```bash
+cd /workspace/ComfyUI/custom_nodes/comfyui-image-to-prompt-node && git pull && pip install -r requirements.txt
 ```
-user_prompt: "Generate a detailed product description prompt suitable for a professional product image generation model. Include materials, textures, lighting, and styling."
-```
-
-**For Character Design:**
-
-```
-user_prompt: "Create a detailed character description in a format suitable for character design prompts. Include appearance, clothing, style, and mood."
-```
-
-**For Landscape Analysis:**
-
-```
-user_prompt: "Describe this landscape with focus on geographical features, climate indicators, time of day, and environmental details useful for landscape generation."
-```
-
-## Workflow Integration
-
-Common workflow pattern:
-
-```
-Image Loader
-    ↓
-Grok Image Analyzer → Prompt Output
-    ↓
-Image Generation Model (e.g., Stable Diffusion)
-    ↓
-Output Image
-```
-
-## Troubleshooting
-
-### "API key not provided"
-
-- Check that `XAI_API_KEY` environment variable is set, or
-- Paste the API key directly in the node's `api_key` field
-
-### "No analysis returned from Grok"
-
-- Check that your API key is valid
-- Ensure you have sufficient API quota
-- Verify the image is a valid format (PNG, JPG, WebP, GIF)
-
-### Connection timeout
-
-- Check your internet connection
-- Verify the API base URL is correct
-- Try increasing timeout in the node code if needed
-
-### CORS or SSL errors
-
-- Ensure you're not behind a proxy that's interfering
-- Check that your firewall allows HTTPS requests to api.x.ai
-
-## API Model Options
-
-Currently available Grok models:
-
-- `grok-4-1-fast-non-reasoning` - Fast, efficient model suitable for real-time analysis
-
-For additional models, update the dropdown in the `INPUT_TYPES` method.
-
-## Limitations
-
-- **Max image size**: The API has limits on image resolution; very large images may need to be resized
-- **Timeout**: API requests timeout after 60 seconds
-- **Rate limiting**: Subject to XAI API rate limits (check your pricing plan)
-- **Supported formats**: PNG, JPG, WebP, GIF
-
-## Performance Tips
-
-1. **Batch Processing**: Use the node sequentially for multiple images in different workflows
-2. **Prompt Engineering**: Optimize your user_prompt for better, more specific outputs
-3. **Model Choice**: `grok-4-1-fast-non-reasoning` is optimized for speed without reasoning overhead
 
 ## Related Resources
 
