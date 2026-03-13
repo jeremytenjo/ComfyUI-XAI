@@ -45,10 +45,6 @@ class GrokImageAnalyzer:
                     "multiline": True,
                     "default": "You are an expert at creating detailed, descriptive prompts for image generation models. Provide rich, specific details.",
                 }),
-                "user_prompt": ("STRING", {
-                    "multiline": True,
-                    "default": "Describe this image in detail for use as a prompt for an image generation model. Focus on composition, style, colors, and main subjects.",
-                }),
             }
         }
 
@@ -58,7 +54,7 @@ class GrokImageAnalyzer:
     CATEGORY = "image/analysis"
     OUTPUT_NODE = True
 
-    def analyze_image(self, image: torch.Tensor, api_key: str, model: str, system_prompt: str = "", user_prompt: str = "") -> Tuple[str]:
+    def analyze_image(self, image: torch.Tensor, api_key: str, model: str, system_prompt: str = "") -> Tuple[str]:
         """
         Analyze an image using Grok API and return a descriptive prompt
 
@@ -67,7 +63,6 @@ class GrokImageAnalyzer:
             api_key: XAI API key
             model: Model name to use
             system_prompt: Optional system context for analysis
-            user_prompt: Optional prompt for analysis
 
         Returns:
             Tuple containing the generated prompt string
@@ -94,7 +89,6 @@ class GrokImageAnalyzer:
 
         # Use defaults if prompts are empty
         _system_prompt = system_prompt or "You are an expert at creating detailed, descriptive prompts for image generation models. Provide rich, specific details."
-        _user_prompt = user_prompt or "Describe this image in detail for use as a prompt for an image generation model. Focus on composition, style, colors, and main subjects."
 
         if _system_prompt and _system_prompt.strip():
             content.append({
@@ -109,11 +103,6 @@ class GrokImageAnalyzer:
             }
         })
 
-        content.append({
-            "type": "text",
-            "text": _user_prompt
-        })
-
         # Make API request
         headers = {
             "Content-Type": "application/json",
@@ -126,7 +115,7 @@ class GrokImageAnalyzer:
                 {
                     "role": "user",
                     "content": content
-                }
+                } 
             ],
             "temperature": 0.7,
             "max_tokens": 2048
