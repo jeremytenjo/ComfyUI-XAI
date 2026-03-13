@@ -29,19 +29,9 @@ cd comfyui-image-to-prompt-node &&
 pip install -r requirements.txt
 ```
 
-5. Set your API key in RunPod:
+4. Restart ComfyUi
 
-- In the RunPod pod settings, add environment variable `XAI_API_KEY=your-api-key`.
-- Optional: add `XAI_BASE_URL` if using a custom endpoint.
-
-6. Restart ComfyUI (or restart the pod) so the new node and env vars are loaded.
-
-7. In ComfyUI, search for `Grok Image Analyzer` and use it in your workflow.
-
-RunPod notes:
-
-- Use a persistent volume for `/workspace` so `custom_nodes` changes survive restarts.
-- If your template uses a different ComfyUI path, find it first:
+Go to comfyui - click Manager - click Restart
 
 ```bash
 find / -maxdepth 4 -type d -name "custom_nodes" 2>/dev/null
@@ -78,9 +68,15 @@ export XAI_BASE_URL="https://custom-api.example.com/v1"
 
 ## Update Node
 
+1. Pull updates
+
 ```bash
 cd /workspace/ComfyUI/custom_nodes/comfyui-image-to-prompt-node && git pull && pip install -r requirements.txt
 ```
+
+2. Restart ComfyUi
+
+Go to comfyui - click Manager - click Restart
 
 ## Related Resources
 
