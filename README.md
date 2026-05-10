@@ -1,93 +1,84 @@
-# ComfyUI-XAI - ComfyUI Custom Node
+# ComfyUI-XAI
 
-A ComfyUI custom node that analyzes images using XAI's Grok vision model and generates detailed prompts suitable for image generation models.
+Custom ComfyUI node that uses xAI Grok Vision to analyze an image and generate a prompt.
 
-## Features
+## What It Does
 
-- 🖼️ Analyzes images using Grok's vision capabilities
-- 🎨 Generates detailed, structured prompts for image generation
-- ⚙️ Configurable system and user prompts
-- 🔒 Secure API key handling (supports environment variables)
-- 🚀 Fast inference with non-reasoning Grok model
+- Analyzes input images with Grok Vision
+- Outputs a detailed prompt for image generation workflows
+- Supports custom system/user prompts
+- Supports API key via env var or node input
 
-## Installation
+## Install
 
-Use this when ComfyUI is running inside a RunPod template/container.
-
-1. Open your pod terminal (or SSH into the pod).
-2. Go to ComfyUI custom nodes directory (common path shown below):
+For ComfyUI on RunPod (or similar):
 
 ```bash
 cd /workspace/ComfyUI/custom_nodes
-```
-
-3. import node:
-
-```bash
-git clone https://github.com/jeremytenjo/ComfyUI-XAI.git &&
-cd ComfyUI-XAI &&
+git clone https://github.com/jeremytenjo/ComfyUI-XAI.git
+cd ComfyUI-XAI
 pip install -r requirements.txt
 ```
 
-4. Restart ComfyUi
-
-Go to comfyui - click Manager - click Restart
+If you need to locate your `custom_nodes` folder:
 
 ```bash
 find / -maxdepth 4 -type d -name "custom_nodes" 2>/dev/null
 ```
 
+Restart ComfyUI after install.
+
 ## Setup
 
-### 1. Get Your API Key
-
-- Sign up at [x.ai](https://x.ai) (formerly XAI)
-- Get your API key from the dashboard
-- Keep it secure!
-
-### 2. Configure API Key
-
-You can provide the API key in two ways:
-
-**Option A: Environment Variable (Recommended)**
+Set your API key (recommended):
 
 ```bash
 export XAI_API_KEY="your-api-key-here"
 ```
 
-**Option B: Node Input**
-Simply paste your API key directly into the node's `api_key` input field in ComfyUI.
+Or paste it directly into the node `api_key` input.
 
-### 3. Optional: Configure Base URL
-
-If using a custom API endpoint, set:
+Optional custom endpoint:
 
 ```bash
 export XAI_BASE_URL="https://custom-api.example.com/v1"
 ```
 
-## Update Node
+## Node Properties
 
-1. Pull updates
+Node name in ComfyUI: `ComfyUI-XAI` (`ComfyUIXAI`)
+
+Required inputs:
+- `image` (`IMAGE`): Input image tensor
+- `api_key` (`STRING`): xAI API key. If empty, uses `XAI_API_KEY` env var
+- `model` (`STRING` enum): `grok-4-1-fast-non-reasoning`
+
+Optional inputs:
+- `system_prompt` (`STRING`, multiline): Custom instruction for prompt generation
+
+Output:
+- `prompt` (`STRING`): Generated image prompt text
+
+Node metadata:
+- `FUNCTION`: `analyze_image`
+- `CATEGORY`: `image/analysis`
+- `OUTPUT_NODE`: `True`
+
+## Update
 
 ```bash
-cd /workspace/ComfyUI/custom_nodes/ComfyUI-XAI && git pull && pip install -r requirements.txt
+cd /workspace/ComfyUI/custom_nodes/ComfyUI-XAI
+git pull
+pip install -r requirements.txt
 ```
 
-2. Restart ComfyUi
+Restart ComfyUI after updating.
 
-Go to comfyui - click Manager - click Restart
+## Links
 
-## Related Resources
-
-- [XAI Documentation](https://api.x.ai/documentation)
-- [ComfyUI Documentation](https://github.com/comfyanonymous/ComfyUI)
-- [Grok Vision Capabilities](https://x.ai/api/docs#vision)
-
-## License
-
-Same license as the parent project.
+- [xAI API Docs](https://api.x.ai/documentation)
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 
 ## Contributing
 
-Found an issue or have a feature request? Please submit an issue in the repository.
+Open an issue or PR.
