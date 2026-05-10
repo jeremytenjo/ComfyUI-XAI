@@ -18,7 +18,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class GrokImageAnalyzer:
+class ComfyUIXAI:
     """
     ComfyUI node that analyzes images using Grok API and returns descriptive prompts
     """
@@ -208,9 +208,9 @@ class GrokImageAnalyzer:
 
 # Export node class and display name
 NODE_CLASS_MAPPINGS = {
-    "GrokImageAnalyzer": GrokImageAnalyzer,
+    "ComfyUIXAI": ComfyUIXAI,
 }
 
 NODE_DISPLAY_NAMES = {
-    "GrokImageAnalyzer": "Grok Image Analyzer",
+    "ComfyUIXAI": "ComfyUI-XAI",
 }

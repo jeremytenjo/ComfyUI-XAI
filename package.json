@@ -1,4 +1,5 @@
 {
+  "name": "comfyui-xai",
   "scripts": {
     "dev": "cd ../.. && python3 main.py --enable-manager"
   }

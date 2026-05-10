@@ -1,4 +1,4 @@
-# Grok Image Analyzer - ComfyUI Custom Node
+# ComfyUI-XAI - ComfyUI Custom Node
 
 A ComfyUI custom node that analyzes images using XAI's Grok vision model and generates detailed prompts suitable for image generation models.
 
@@ -24,8 +24,8 @@ cd /workspace/ComfyUI/custom_nodes
 3. import node:
 
 ```bash
-git clone https://github.com/jeremytenjo/comfyui-image-to-prompt-node.git &&
-cd comfyui-image-to-prompt-node &&
+git clone https://github.com/jeremytenjo/ComfyUI-XAI.git &&
+cd ComfyUI-XAI &&
 pip install -r requirements.txt
 ```
 
@@ -71,7 +71,7 @@ export XAI_BASE_URL="https://custom-api.example.com/v1"
 1. Pull updates
 
 ```bash
-cd /workspace/ComfyUI/custom_nodes/comfyui-image-to-prompt-node && git pull && pip install -r requirements.txt
+cd /workspace/ComfyUI/custom_nodes/ComfyUI-XAI && git pull && pip install -r requirements.txt
 ```
 
 2. Restart ComfyUi
